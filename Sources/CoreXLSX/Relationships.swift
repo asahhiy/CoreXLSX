@@ -15,9 +15,8 @@
 //  Created by Max Desiatov on 27/10/2018.
 //
 
-/** An array of `Relationship` values. This type directly maps the internal XML structure of the
- `.xlsx` format.
- */
+/// An array of `Relationship` values. This type directly maps the internal XML structure of the
+/// `.xlsx` format.
 public struct Relationships: Codable, Equatable {
   public let items: [Relationship]
 
@@ -26,10 +25,9 @@ public struct Relationships: Codable, Equatable {
   }
 }
 
-/** Relationship to an entity stored in a given `.xlsx` archive. These can be worksheets,
- chartsheets, thumbnails and a few other internal entities. Most of the time users of CoreXLSX
- wouldn't need to handle relationships directly.
- */
+/// Relationship to an entity stored in a given `.xlsx` archive. These can be worksheets,
+/// chartsheets, thumbnails and a few other internal entities. Most of the time users of CoreXLSX
+/// wouldn't need to handle relationships directly.
 public struct Relationship: Codable, Equatable {
   public enum SchemaType: String, Codable {
     case calcChain =
@@ -130,6 +128,17 @@ public struct Relationship: Codable, Equatable {
       """
       http://purl.oclc.org/ooxml/officeDocument/relationships/extendedProperties
       """
+    case sheetMetadata =
+      """
+      http://schemas.openxmlformats.org/officeDocument/2006/relationships/\
+      sheetMetadata
+      """
+  }
+
+  enum CodingKeys: String, CodingKey {
+    case id
+    case rawType = "type"
+    case target
   }
 
   /// The identifier for this entity.
