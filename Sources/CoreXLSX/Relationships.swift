@@ -137,7 +137,7 @@ public struct Relationship: Codable, Equatable {
 
   enum CodingKeys: String, CodingKey {
     case id
-    case rawType = "type"
+    case type
     case target
   }
 
