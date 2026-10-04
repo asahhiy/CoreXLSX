@@ -131,6 +131,25 @@ final class RelationshipsTests: XCTestCase {
     XCTAssertEqual(relationships.items, [person])
   }
 
+  func testClassificationLabelsRelationship() throws {
+    let xml = """
+    <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+      <Relationship
+        Id="rId1"
+        Type="http://schemas.microsoft.com/office/2020/02/relationships/classificationlabels"
+        Target="docMetadata/LabelInfo.xml"/>
+    </Relationships>
+    """.data(using: .utf8)!
+    let decoder = XMLDecoder()
+    decoder.keyDecodingStrategy = .convertFromCapitalized
+
+    let relationships = try decoder.decode(Relationships.self, from: xml)
+
+    XCTAssertEqual(relationships.items, [
+      Relationship(id: "rId1", type: .classificationLabels, target: "docMetadata/LabelInfo.xml"),
+    ])
+  }
+
   func testCustomXmlSchemaType() throws {
     guard let file =
       XLSXFile(filepath: "\(fixturesPath)/jewelershealthcare.com-census.1.xlsx")

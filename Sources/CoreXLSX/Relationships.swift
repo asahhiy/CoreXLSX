@@ -133,6 +133,11 @@ public struct Relationship: Codable, Equatable {
       http://schemas.openxmlformats.org/officeDocument/2006/relationships/\
       sheetMetadata
       """
+    case classificationLabels =
+      """
+      http://schemas.microsoft.com/office/2020/02/relationships/\
+      classificationlabels
+      """
   }
 
   enum CodingKeys: String, CodingKey {
